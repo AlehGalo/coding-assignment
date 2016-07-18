@@ -6,10 +6,14 @@ repositories {
     jcenter()
 }
 
+mainClassName = "com.geomotiv.rubicon.Application"
+
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.13'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
-    testCompile 'junit:junit:4.12'
+    compile "org.slf4j:slf4j-api:${slf4j_api_version}"
+    compile "com.fasterxml.jackson.core:${jackson_data_bind_version}"
+    compile "org.projectlombok:lombok:${lomobk_version}"
+    compile "org.apache.commons:commons-csv:${commons_csv_version}"
+    testCompile "junit:junit:${junit_version}"
 }
 
 
