@@ -6,7 +6,9 @@ import com.geomotiv.rubicon.domain.Site;
 import com.geomotiv.rubicon.domain.SiteKeyworded;
 import com.geomotiv.rubicon.domain.SitesKeywordedResult;
 import com.geomotiv.rubicon.domain.SupportedFileTypes;
+import com.geomotiv.rubicon.exception.RubiconException;
 import com.geomotiv.rubicon.service.FileReaderFactory;
+import com.geomotiv.rubicon.service.ReadData;
 import com.geomotiv.rubicon.utils.FileUtils;
 import com.geomotiv.rubicon.utils.SiteIntantiationUtils;
 import rubiconproject.KeywordService;
@@ -45,28 +47,7 @@ public class Application {
         if (isDirectory) {
             FileReaderFactory factory = new FileReaderFactory();
             Files.list(pathToDir).forEach(a -> {
-                long start1 = System.currentTimeMillis();
-                String fileName = a.getFileName().toString();
-                String extension = FileUtils.getFileExtension(fileName);
-
-                SupportedFileTypes supportedFileType = SupportedFileTypes.getFileTypeByExtension(extension);
-
-                List<Site> listOfSites = factory.getFileReader(supportedFileType).readResource(a.toFile());
-                List<SiteKeyworded> listOfSitesGlobal = new ArrayList<>();
-                for (Site s : listOfSites) {
-                    System.out.print(s.getId() + " ");
-                    System.out.println(s.getName());
-                    SiteKeyworded sk = SiteIntantiationUtils.instantiateSiteKeyworded(s);
-                    sk.setKeywords(keywordService.resolveKeywords(s));
-                    listOfSitesGlobal.add(sk);
-                }
-                SitesKeywordedResult sitesKeywordedResult1 = new SitesKeywordedResult();
-                sitesKeywordedResult1.setSites(listOfSitesGlobal);
-                sitesKeywordedResult1.setCollectionId(fileName);
-
-                sitesKeywordedResult.add(sitesKeywordedResult1);
-
-                System.out.println(">>>> " + (System.currentTimeMillis() - start1));
+                sitesKeywordedResult.add(new ReadData().readData(a));
             });
         }
         System.out.println(System.currentTimeMillis() - start + " ms");

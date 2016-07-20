@@ -1,6 +1,8 @@
 package com.geomotiv.rubicon.io;
 
 import com.geomotiv.rubicon.domain.Site;
+import com.geomotiv.rubicon.exception.RubiconException;
+import com.geomotiv.rubicon.exception.RubiconIOException;
 import com.geomotiv.rubicon.service.CSVParserFactory;
 import com.geomotiv.rubicon.service.Extractable;
 import com.geomotiv.rubicon.utils.Assert;
@@ -28,13 +30,13 @@ public class CSVStreamReader implements ResourceReader<List<Site>, Reader> {
     }
 
     @Override
-    public List<Site> readResource(Reader fileReader) {
+    public List<Site> readResource(Reader fileReader) throws RubiconException {
         Assert.notNull(fileReader);
         instantiateParserFactory(fileReader);
         return extractRecords();
     }
 
-    private void instantiateParserFactory(Reader fileReader) {
+    private void instantiateParserFactory(Reader fileReader) throws RubiconIOException {
         iterable = new CSVParserFactory().createParser(header, fileReader);
     }
 
