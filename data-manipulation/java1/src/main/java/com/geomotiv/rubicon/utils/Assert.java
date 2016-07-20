@@ -12,7 +12,7 @@ public final class Assert {
         if (obj == null) throw new IllegalArgumentException();
     }
 
-    public static boolean notEmptyOrNull(String string){
+    public static boolean notEmptyOrNull(final String string) {
         return string == null || string.isEmpty();
     }
 }

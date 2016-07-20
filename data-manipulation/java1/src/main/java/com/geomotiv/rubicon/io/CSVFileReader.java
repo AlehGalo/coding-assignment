@@ -1,11 +1,15 @@
 package com.geomotiv.rubicon.io;
 
+import com.geomotiv.rubicon.domain.CSVHeaders;
 import com.geomotiv.rubicon.domain.Site;
+import com.geomotiv.rubicon.exception.RubiconException;
+import com.geomotiv.rubicon.exception.RubiconIOException;
+import com.geomotiv.rubicon.service.SiteExtractor;
 import com.geomotiv.rubicon.utils.Assert;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.Reader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,19 +17,16 @@ import java.util.List;
  */
 public class CSVFileReader implements ResourceReader<List<Site>, File> {
 
-    private CSVStreamReader streamReader = new CSVStreamReader();
+
+    private CSVStreamReader streamReader = new CSVStreamReader(CSVHeaders.class, new SiteExtractor());
 
     @Override
-    public List<Site> readResource(File file) {
+    public List<Site> readResource(File file) throws RubiconException {
         Assert.notNull(file);
-        Reader in = null;
-        try {
-            in = new java.io.FileReader(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        try (FileReader fileReader = new FileReader(file)) {
+            return streamReader.readResource(fileReader);
+        } catch (IOException e) {
+            throw new RubiconIOException(e.getMessage(), e);
         }
-        return streamReader.readResource(in);
     }
-
-
 }

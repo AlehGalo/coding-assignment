@@ -8,6 +8,7 @@ import com.geomotiv.rubicon.domain.SitesKeywordedResult;
 import com.geomotiv.rubicon.domain.SupportedFileTypes;
 import com.geomotiv.rubicon.service.FileReaderFactory;
 import com.geomotiv.rubicon.utils.FileUtils;
+import com.geomotiv.rubicon.utils.SiteIntantiationUtils;
 import rubiconproject.KeywordService;
 
 import java.io.File;
@@ -55,7 +56,7 @@ public class Application {
                 for (Site s : listOfSites) {
                     System.out.print(s.getId() + " ");
                     System.out.println(s.getName());
-                    SiteKeyworded sk = SiteKeyworded.instantiateSiteKeyworded(s);
+                    SiteKeyworded sk = SiteIntantiationUtils.instantiateSiteKeyworded(s);
                     sk.setKeywords(keywordService.resolveKeywords(s));
                     listOfSitesGlobal.add(sk);
                 }

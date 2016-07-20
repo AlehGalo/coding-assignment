@@ -16,14 +16,4 @@ public class SiteKeyworded extends Site {
     @Getter
     @Setter
     private String keywords;
-
-    public static final SiteKeyworded instantiateSiteKeyworded(Site site) {
-        SiteKeyworded siteKeyworded = new SiteKeyworded();
-        siteKeyworded.setMobile(site.isMobile());
-        siteKeyworded.setScore(site.getScore());
-        siteKeyworded.setName(site.getName());
-        siteKeyworded.setId(site.getId());
-        return siteKeyworded;
-    }
-
 }

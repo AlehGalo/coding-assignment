@@ -14,15 +14,17 @@ public final class StringUtils {
         return source == null || source.isEmpty();
     }
 
-    public static boolean getBooleanFromInt(String source) {
+    static boolean getBooleanFromInt(String source) {
         return ONE.equals(source);
     }
 
-    public static Integer getIntegerFromString(String source) {
+    static Integer getIntegerFromString(String source) {
+        Assert.notNull(source);
         return Integer.valueOf(source);
     }
 
-    public static Float getFloatFromString(String source) {
+    static Float getFloatFromString(String source) {
+        Assert.notNull(source);
         return Float.valueOf(source);
     }
 }

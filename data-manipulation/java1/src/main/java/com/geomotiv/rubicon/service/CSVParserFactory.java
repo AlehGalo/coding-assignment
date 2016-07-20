@@ -1,5 +1,6 @@
 package com.geomotiv.rubicon.service;
 
+import com.geomotiv.rubicon.exception.RubiconIOException;
 import com.geomotiv.rubicon.utils.Assert;
 import lombok.Setter;
 import org.apache.commons.csv.CSVFormat;
@@ -18,14 +19,13 @@ public class CSVParserFactory {
 
     private static final CSVFormat DEFAULT_CSV_FORMAT = CSVFormat.RFC4180.withFirstRecordAsHeader().withIgnoreEmptyLines();
 
-    public CSVParser createParser(final Class<? extends Enum<?>> headerEnum, final Reader reader) {
+    public CSVParser createParser(final Class<? extends Enum<?>> headerEnum, final Reader reader) throws RubiconIOException {
         Assert.notNull(headerEnum);
         try {
             return getParserBasedOnHeader(headerEnum).parse(reader);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RubiconIOException(e.getMessage(), e);
         }
-        throw new IllegalArgumentException("asdf");
     }
 
     private CSVFormat getCsvFormat() {
