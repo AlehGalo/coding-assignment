@@ -3,8 +3,8 @@ package com.geomotiv.rubicon.service;
 import com.geomotiv.rubicon.domain.Site;
 import com.geomotiv.rubicon.domain.SupportedFileTypes;
 import com.geomotiv.rubicon.io.CSVFileReader;
-import com.geomotiv.rubicon.io.FileReader;
 import com.geomotiv.rubicon.io.JSONFileReader;
+import com.geomotiv.rubicon.io.ResourceReader;
 
 import java.io.File;
 import java.util.List;
@@ -14,18 +14,12 @@ import java.util.List;
  */
 public class FileReaderFactory {
 
-    private File file;
-
-    public FileReaderFactory(File file){
-        this.file = file;
-    }
-
-    public FileReader<List<Site>> getFileReader(SupportedFileTypes fileType) {
+    public ResourceReader<List<Site>, File> getFileReader(SupportedFileTypes fileType) {
         switch (fileType) {
             case CSV:
-                return new CSVFileReader(file);
+                return new CSVFileReader();
             case JSON:
-                return new JSONFileReader(file);
+                return new JSONFileReader();
             default:
                 throw new IllegalArgumentException("Unsupported file type");
         }

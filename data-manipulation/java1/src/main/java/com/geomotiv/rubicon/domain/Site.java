@@ -1,6 +1,8 @@
 package com.geomotiv.rubicon.domain;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.Getter;
@@ -13,10 +15,8 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-@JsonRootName("site")
 public class Site implements Serializable {
 
-    @JsonProperty("site_id")
     private Integer id;
 
     private String name;
@@ -25,4 +25,14 @@ public class Site implements Serializable {
     private boolean isMobile;
 
     private float score;
+
+    @JsonGetter("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("site_id")
+    public void setSiteId(Integer id) {
+        this.id = id;
+    }
 }

@@ -3,6 +3,7 @@ package com.geomotiv.rubicon.io;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geomotiv.rubicon.domain.Site;
+import com.geomotiv.rubicon.utils.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,21 +13,19 @@ import java.util.List;
  * Created by Oleg on 7/18/16.
  */
 
-public class JSONFileReader extends FileReader<List<Site>> {
+public class JSONFileReader implements ResourceReader<List<Site>, File> {
 
-    public JSONFileReader(File file){
-        super(file);
-    }
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public List<Site> readResource() {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public List<Site> readResource(File file) {
+        Assert.notNull(file);
         try {
-            return objectMapper.readValue(getFile(), new TypeReference<List<Site>>(){});
+            return objectMapper.readValue(file, new TypeReference<List<Site>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        TODO: remove it
-        return null;
+        throw new IllegalArgumentException();
     }
 }

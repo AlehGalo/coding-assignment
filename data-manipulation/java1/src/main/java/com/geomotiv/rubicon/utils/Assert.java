@@ -5,11 +5,14 @@ package com.geomotiv.rubicon.utils;
  */
 public final class Assert {
 
-    private Assert(){
-
+    private Assert() {
     }
 
-    public static void notNull(Object obj){
-//        obj == null ? throw new IllegalArgumentException() : 0;
+    public static void notNull(Object obj) {
+        if (obj == null) throw new IllegalArgumentException();
+    }
+
+    public static boolean notEmptyOrNull(String string){
+        return string == null || string.isEmpty();
     }
 }
