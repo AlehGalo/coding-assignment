@@ -30,7 +30,7 @@ public class CSVStreamReader implements ResourceReader<List<Site>, Reader> {
     }
 
     @Override
-    public List<Site> readResource(Reader fileReader) throws RubiconException {
+    public List<Site> readResource(Reader fileReader) throws RubiconIOException {
         Assert.notNull(fileReader);
         instantiateParserFactory(fileReader);
         return extractRecords();

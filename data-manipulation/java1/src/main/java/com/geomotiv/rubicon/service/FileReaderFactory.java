@@ -2,11 +2,13 @@ package com.geomotiv.rubicon.service;
 
 import com.geomotiv.rubicon.domain.Site;
 import com.geomotiv.rubicon.domain.SupportedFileTypes;
+import com.geomotiv.rubicon.exception.RubiconMissedReaderException;
 import com.geomotiv.rubicon.io.CSVFileReader;
-import com.geomotiv.rubicon.io.JSONFileReader;
+import com.geomotiv.rubicon.io.JSONPathReader;
 import com.geomotiv.rubicon.io.ResourceReader;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -14,14 +16,14 @@ import java.util.List;
  */
 public class FileReaderFactory {
 
-    public ResourceReader<List<Site>, File> getFileReader(SupportedFileTypes fileType) {
+    public ResourceReader<List<Site>, Path> getFileReader(SupportedFileTypes fileType) throws RubiconMissedReaderException {
         switch (fileType) {
             case CSV:
                 return new CSVFileReader();
             case JSON:
-                return new JSONFileReader();
+                return new JSONPathReader();
             default:
-                throw new IllegalArgumentException("Unsupported file type");
+                throw new RubiconMissedReaderException("Unsupported file type " + fileType);
         }
     }
 }

@@ -13,7 +13,7 @@ import static java.util.stream.StreamSupport.stream;
 /**
  * Created by Oleg on 7/20/16.
  */
-public class SiteExtractor implements Extractable<List<Site>, CSVRecord> {
+public class CSVRecordsExtractor implements Extractable<List<Site>, CSVRecord> {
 
     @Override
     public List<Site> extract(Iterable<CSVRecord> iterable) {

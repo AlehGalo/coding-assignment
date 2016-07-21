@@ -15,7 +15,7 @@ public final class SiteIntantiationUtils {
     private SiteIntantiationUtils() {
     }
 
-    public static SiteKeyworded instantiateSiteKeyworded(Site site) {
+    public static SiteKeyworded createSiteKeywordedFromSite(Site site) {
         Assert.notNull(site);
         SiteKeyworded siteKeyworded = new SiteKeyworded();
         siteKeyworded.setMobile(site.isMobile());

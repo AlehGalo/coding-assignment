@@ -1,5 +1,7 @@
 package com.geomotiv.rubicon.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +11,9 @@ import java.util.List;
 /**
  * Created by Oleg on 7/19/16.
  */
-@Getter
 @Setter
+@Getter
+@AllArgsConstructor
 public class SitesKeywordedResult implements Serializable{
 
     private String collectionId;
