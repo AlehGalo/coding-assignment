@@ -1,16 +1,11 @@
 package com.geomotiv.rubicon.io;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.PrettyPrinter;
-import com.fasterxml.jackson.core.util.MinimalPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.geomotiv.rubicon.domain.SitesKeywordedResult;
 import com.geomotiv.rubicon.exception.RubiconIOException;
 import com.geomotiv.rubicon.io.format.JSONPrettyPrinter;
-import com.oracle.javafx.jmx.json.JSONFactory;
 import lombok.AllArgsConstructor;
 
 import java.io.File;
