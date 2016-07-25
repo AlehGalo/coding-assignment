@@ -14,36 +14,55 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>.</p>
+ * <p>Class that run the program contains main methon.</p>
  * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class Application {
 
-
+    /**
+     * Saving statistics regarding files processing number.
+     */
     private static int counterOrUnreadFiles = 0, totalFiles = 0;
 
+    /**
+     * Time run holder.
+     */
     private static long timeTaken;
 
-    public static void main(String args[]) throws RubiconException {
+    /**
+     * Main class for running the application with all input parameters.
+     *
+     * @param args array of strings
+     */
+    public static void main(String args[]) {
         long startTimeOfExecution = System.currentTimeMillis();
         if (validateInputParameters(args)) {
             String pathToDirectory = args[0];
             String outputFile = args[1];
-
             List<SitesKeywordedResult> sitesKeywordedResult;
-            sitesKeywordedResult =
-                    new DirectoryReader().readResource(pathToDirectory).stream()
-                            .map(Application::extractPath).filter(a -> !StringUtils.isEmptyOrNull(a.getCollectionId()))
-                            .collect(Collectors.toList());
-
-
-            new JSONFileWriter(new File(outputFile)).write(sitesKeywordedResult);
-            timeTaken = System.currentTimeMillis() - startTimeOfExecution;
+            try {
+                sitesKeywordedResult =
+                        new DirectoryReader().readResource(pathToDirectory).stream()
+                                .map(Application::extractPath).filter(a -> !StringUtils.isEmptyOrNull(a.getCollectionId()))
+                                .collect(Collectors.toList());
+                new JSONFileWriter(new File(outputFile)).write(sitesKeywordedResult);
+                timeTaken = System.currentTimeMillis() - startTimeOfExecution;
+            } catch (RubiconException e) {
+                printErrorMessage(e);
+            }
             printStatistics();
+        } else {
+            printRules();
         }
     }
 
+    /**
+     * Extract path. Read all resources and keep the results in SiteKeywordedResult object.
+     *
+     * @param a - Path
+     * @return execution result or empty site keyworded result
+     */
     private static SitesKeywordedResult extractPath(Path a) {
         try {
             return new PathReader().readResource(a);
@@ -56,15 +75,23 @@ public class Application {
         return SiteIntantiationUtils.getEmptySitesKeywordedResult();
     }
 
+    /**
+     * Validation of input parameters
+     *
+     * @param args - arguments to be validated
+     * @return true/false
+     */
     private static boolean validateInputParameters(String args[]) {
         boolean result = true;
         if (args.length < 2) {
-            printRules();
             result = false;
         }
         return result;
     }
 
+    /**
+     * Print requirements for program arguments
+     */
     private static void printRules() {
         System.out.println("===================== No enough of arguments ===============================");
         System.out.println("Two arguments are required for correct program execution");
@@ -74,10 +101,18 @@ public class Application {
 
     }
 
+    /**
+     * Printing error messaage of application.
+     *
+     * @param e - error occured.
+     */
     private static void printErrorMessage(RubiconException e) {
         System.out.println("Error Occured > " + e.getMessage());
     }
 
+    /**
+     * Prints statistics
+     */
     private static void printStatistics() {
         System.out.println("===================== Statistics =====================");
         System.out.println("> Unread files: " + counterOrUnreadFiles);

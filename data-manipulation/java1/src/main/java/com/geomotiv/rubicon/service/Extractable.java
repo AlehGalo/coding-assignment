@@ -1,7 +1,7 @@
 package com.geomotiv.rubicon.service;
 
 /**
- * <p>.</p>
+ * <p>Marking interface for extracting any value from iterable.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

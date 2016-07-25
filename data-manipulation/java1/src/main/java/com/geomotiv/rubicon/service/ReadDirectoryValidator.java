@@ -4,11 +4,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * <p>.</p>
- *
+ * <p>Validator for reading directory.</p>
+ * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
-public class ReadDirectoryValidator extends ReadPathValidator{
+public class ReadDirectoryValidator extends ReadPathValidator {
 
     public ReadDirectoryValidator(Path path) {
         super(path);

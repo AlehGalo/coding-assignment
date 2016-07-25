@@ -8,8 +8,8 @@ import lombok.Getter;
 import java.nio.file.Path;
 
 /**
- * <p>.</p>
- *
+ * <p>Validator for reading a path.</p>
+ * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class ReadPathValidator implements Validator {
 
     @Override
     public boolean validate() {
-        return path != null ? FileUtils.isReadPermission(path) : false;
+        return path != null && FileUtils.isReadPermission(path);
     }
 
 }

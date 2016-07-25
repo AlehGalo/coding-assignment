@@ -1,5 +1,6 @@
 package com.geomotiv.rubicon.io;
 
+import com.geomotiv.rubicon.domain.CSVHeaders;
 import com.geomotiv.rubicon.domain.Site;
 import com.geomotiv.rubicon.exception.RubiconIOException;
 import com.geomotiv.rubicon.service.CSVParserFactory;
@@ -12,7 +13,7 @@ import java.util.Objects;
 
 /**
  * <p>CSV Stream reader with header and extractor.</p>
- *
+ * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class CSVStreamReader implements ResourceReader<List<Site>, Reader> {
@@ -38,7 +39,7 @@ public class CSVStreamReader implements ResourceReader<List<Site>, Reader> {
     }
 
     private void instantiateParserFactory(Reader fileReader) throws RubiconIOException {
-        iterable = new CSVParserFactory().createParser(header, fileReader);
+        iterable = new CSVParserFactory(header, fileReader).createObject();
     }
 
     private List<Site> extractRecords() {

@@ -4,7 +4,7 @@ import com.geomotiv.rubicon.utils.StringUtils;
 import rubiconproject.KeywordService;
 
 /**
- * <p>.</p>
+ * <p>Service for processing keywords.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

@@ -12,7 +12,7 @@ import java.util.Objects;
 import static com.geomotiv.rubicon.utils.StringUtils.*;
 
 /**
- * <p>.</p>
+ * <p>Utility class for Site and it's children objects.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

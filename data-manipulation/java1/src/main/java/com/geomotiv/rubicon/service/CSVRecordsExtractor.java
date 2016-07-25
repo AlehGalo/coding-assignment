@@ -11,7 +11,7 @@ import static com.geomotiv.rubicon.utils.SiteIntantiationUtils.createSiteFromRec
 import static java.util.stream.StreamSupport.stream;
 
 /**
- * <p>.</p>
+ * <p>Extract iterable CSVRecord to site entity.</p>
  * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

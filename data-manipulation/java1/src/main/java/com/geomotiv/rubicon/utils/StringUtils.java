@@ -3,7 +3,7 @@ package com.geomotiv.rubicon.utils;
 import java.util.Objects;
 
 /**
- * <p>.</p>
+ * <p>Utility class to be used with String objects.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

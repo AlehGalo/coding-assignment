@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 /**
- * <p>.</p>
+ * <p>Utility class for manipulation of files.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

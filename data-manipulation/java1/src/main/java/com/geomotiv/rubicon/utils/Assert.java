@@ -1,7 +1,7 @@
 package com.geomotiv.rubicon.utils;
 
 /**
- * <p>.</p>
+ * <p>Simple check utility class.</p>
  * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

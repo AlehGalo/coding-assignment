@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * <p>Reader for path.</p>
+ * <p>Reader for path object.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

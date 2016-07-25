@@ -8,7 +8,7 @@ import rubiconproject.KeywordService;
 import java.util.Objects;
 
 /**
- * <p>.</p>
+ * <p>Transformation of input data.</p>
  *
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */

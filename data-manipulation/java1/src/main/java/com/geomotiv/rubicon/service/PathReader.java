@@ -18,13 +18,11 @@ import static com.geomotiv.rubicon.utils.FileUtils.getFileExtension;
 import static com.geomotiv.rubicon.utils.FileUtils.getFileName;
 
 /**
- * <p>.</p>
- *
+ * <p>Reader for path resource.</p>
+ * <p>
  * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class PathReader implements ResourceReader<SitesKeywordedResult, Path> {
-
-    private FileReaderFactory fileReaderFactory = new FileReaderFactory();
 
     @Setter
     private Transformer transformable = new Transformer(new PlainKeywordService());
@@ -33,7 +31,7 @@ public class PathReader implements ResourceReader<SitesKeywordedResult, Path> {
         Objects.requireNonNull(path);
         String fileName = getFileName(path);
         String extension = getFileExtension(fileName);
-        List<SiteKeyworded> list = fileReaderFactory.getFileReader(getFileTypeByExtension(extension)).
+        List<SiteKeyworded> list = new FileReaderFactory(getFileTypeByExtension(extension)).createObject().
                 readResource(path).stream().map(this::createKeywordedSite).collect(Collectors.toList());
         return new SitesKeywordedResult(fileName, list);
     }
