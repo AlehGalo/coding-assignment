@@ -1,7 +1,6 @@
 package com.geomotiv.rubicon.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Oleg on 7/19/16.
+ * <p>Entity that contains the results of aggregation of data.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 @Setter
 @Getter

@@ -6,7 +6,9 @@ import java.util.Set;
 import static java.util.Arrays.asList;
 
 /**
- * Created by Oleg on 7/18/16.
+ * <p>All extensions of files that are supported by the system. One file type can support more then one file extension.</p>
+ * <p>
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public enum SupportedFileTypes {
 
@@ -14,15 +16,15 @@ public enum SupportedFileTypes {
 
     private Set<String> extensions;
 
-    SupportedFileTypes(String ... args){
+    SupportedFileTypes(String... args) {
         extensions = new HashSet<>(args.length);
         extensions.addAll(asList(args));
     }
 
-    public static SupportedFileTypes getFileTypeByExtension(String source){
+    public static SupportedFileTypes getFileTypeByExtension(String source) {
         SupportedFileTypes types[] = SupportedFileTypes.values();
-        for(SupportedFileTypes type: types){
-            if(type.extensions.contains(source)){
+        for (SupportedFileTypes type : types) {
+            if (type.extensions.contains(source)) {
                 return type;
             }
         }

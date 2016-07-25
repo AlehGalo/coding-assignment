@@ -1,11 +1,19 @@
 package com.geomotiv.rubicon.utils;
 
+import java.util.Objects;
+
 /**
- * Created by Oleg on 7/19/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public final class StringUtils {
 
     private static final String ONE = "1";
+
+    public static final String EMPTY = "";
+
+    public static final char NEW_LINE = '\n';
 
     private StringUtils() {
     }
@@ -19,12 +27,12 @@ public final class StringUtils {
     }
 
     public static Integer getIntegerFromString(String source) {
-        Assert.notNull(source);
+        Objects.requireNonNull(source);
         return Integer.valueOf(source);
     }
 
     public static Float getFloatFromString(String source) {
-        Assert.notNull(source);
+        Objects.requireNonNull(source);
         return Float.valueOf(source);
     }
 }

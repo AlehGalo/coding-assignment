@@ -3,18 +3,14 @@ package com.geomotiv.rubicon.service;
 import com.geomotiv.rubicon.domain.Site;
 import com.geomotiv.rubicon.domain.SiteKeyworded;
 import com.geomotiv.rubicon.domain.SitesKeywordedResult;
-import com.geomotiv.rubicon.domain.SupportedFileTypes;
 import com.geomotiv.rubicon.exception.RubiconException;
-import com.geomotiv.rubicon.exception.RubiconIOException;
-import com.geomotiv.rubicon.exception.RubiconMissedReaderException;
 import com.geomotiv.rubicon.io.ResourceReader;
-import com.geomotiv.rubicon.utils.Assert;
-import com.geomotiv.rubicon.utils.FileUtils;
 import com.geomotiv.rubicon.utils.SiteIntantiationUtils;
 import lombok.Setter;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.geomotiv.rubicon.domain.SupportedFileTypes.getFileTypeByExtension;
@@ -22,7 +18,9 @@ import static com.geomotiv.rubicon.utils.FileUtils.getFileExtension;
 import static com.geomotiv.rubicon.utils.FileUtils.getFileName;
 
 /**
- * Created by Oleg on 7/18/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class PathReader implements ResourceReader<SitesKeywordedResult, Path> {
 
@@ -32,16 +30,16 @@ public class PathReader implements ResourceReader<SitesKeywordedResult, Path> {
     private Transformer transformable = new Transformer(new PlainKeywordService());
 
     public SitesKeywordedResult readResource(Path path) throws RubiconException {
-        Assert.notNull(path);
+        Objects.requireNonNull(path);
         String fileName = getFileName(path);
         String extension = getFileExtension(fileName);
         List<SiteKeyworded> list = fileReaderFactory.getFileReader(getFileTypeByExtension(extension)).
-                readResource(path.toFile()).stream().map(this::createKeywordedSite).collect(Collectors.toList());
+                readResource(path).stream().map(this::createKeywordedSite).collect(Collectors.toList());
         return new SitesKeywordedResult(fileName, list);
     }
 
     private String getProcessResult(Object object) {
-        Assert.notNull(transformable);
+        Objects.requireNonNull(transformable);
         transformable.setObjectToProcess(object);
         transformable.transform();
         return transformable.getOperationResult();

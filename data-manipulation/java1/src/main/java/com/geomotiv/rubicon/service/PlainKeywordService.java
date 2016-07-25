@@ -1,14 +1,17 @@
 package com.geomotiv.rubicon.service;
 
+import com.geomotiv.rubicon.utils.StringUtils;
 import rubiconproject.KeywordService;
 
 /**
- * Created by Oleg on 7/18/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class PlainKeywordService implements KeywordService {
 
     @Override
     public String resolveKeywords(Object site) {
-        return "";
+        return StringUtils.EMPTY;
     }
 }

@@ -7,12 +7,13 @@ import com.geomotiv.rubicon.io.CSVFileReader;
 import com.geomotiv.rubicon.io.JSONPathReader;
 import com.geomotiv.rubicon.io.ResourceReader;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Created by Oleg on 7/18/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class FileReaderFactory {
 

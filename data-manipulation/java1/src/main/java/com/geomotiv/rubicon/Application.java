@@ -1,78 +1,59 @@
 package com.geomotiv.rubicon;
 
-import com.geomotiv.rubicon.domain.Site;
-import com.geomotiv.rubicon.domain.SiteKeyworded;
 import com.geomotiv.rubicon.domain.SitesKeywordedResult;
 import com.geomotiv.rubicon.exception.RubiconException;
-import com.geomotiv.rubicon.exception.RubiconIOException;
 import com.geomotiv.rubicon.io.DirectoryReader;
 import com.geomotiv.rubicon.io.JSONFileWriter;
-import com.geomotiv.rubicon.io.JSONPathReader;
 import com.geomotiv.rubicon.service.PathReader;
-import com.geomotiv.rubicon.service.PlainKeywordService;
-import com.geomotiv.rubicon.service.Transformer;
-import rubiconproject.KeywordService;
+import com.geomotiv.rubicon.utils.SiteIntantiationUtils;
+import com.geomotiv.rubicon.utils.StringUtils;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Oleg on 7/15/16.
+ * <p>.</p>
+ * <p>
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class Application {
 
-    private static JSONPathReader jsonPathReader = new JSONPathReader();
 
     private static int counterOrUnreadFiles = 0, totalFiles = 0;
 
+    private static long timeTaken;
+
     public static void main(String args[]) throws RubiconException {
-        long start = System.currentTimeMillis();
+        long startTimeOfExecution = System.currentTimeMillis();
         if (validateInputParameters(args)) {
             String pathToDirectory = args[0];
             String outputFile = args[1];
 
-
-
-
-            PathReader pathReader = new PathReader();
-
-//            pathReader.setTransformable(new Transformer(new KeywordService() {
-//                @Override
-//                public String resolveKeywords(Object site) {
-//                    return "ANYTHING";
-//                }
-//            }));
-
-
             List<SitesKeywordedResult> sitesKeywordedResult;
-            sitesKeywordedResult = new DirectoryReader().readResource(pathToDirectory)
-                    .map(Path::getFileSystem);
+            sitesKeywordedResult =
+                    new DirectoryReader().readResource(pathToDirectory).stream()
+                            .map(Application::extractPath).filter(a -> !StringUtils.isEmptyOrNull(a.getCollectionId()))
+                            .collect(Collectors.toList());
 
-
-
-
-                            /*new PathReader().readResource())
-                    .collect(Collectors.toList());*/
 
             new JSONFileWriter(new File(outputFile)).write(sitesKeywordedResult);
-            System.out.println(System.currentTimeMillis() - start + " ms");
-            System.out.println(sitesKeywordedResult.size());
+            timeTaken = System.currentTimeMillis() - startTimeOfExecution;
+            printStatistics();
         }
     }
 
-    private static final List<Site> extractPath(Path a) {
+    private static SitesKeywordedResult extractPath(Path a) {
         try {
-//            new Transformer(new PlainKeywordService()).
             return new PathReader().readResource(a);
-        } catch (RubiconIOException e) {
+        } catch (RubiconException e) {
             ++counterOrUnreadFiles;
             printErrorMessage(e);
+        } finally {
+            ++totalFiles;
         }
-        return Collections.EMPTY_LIST;
+        return SiteIntantiationUtils.getEmptySitesKeywordedResult();
     }
 
     private static boolean validateInputParameters(String args[]) {
@@ -93,16 +74,15 @@ public class Application {
 
     }
 
-    private static void printErrorMessage(Exception e) {
+    private static void printErrorMessage(RubiconException e) {
         System.out.println("Error Occured > " + e.getMessage());
     }
 
-    private static void printDirectoryAccessError() {
-        System.out.println("Directory is not reachable.");
-    }
-
-    private static void printStatistics(){
-
+    private static void printStatistics() {
+        System.out.println("===================== Statistics =====================");
+        System.out.println("> Unread files: " + counterOrUnreadFiles);
+        System.out.println("> Total files: " + totalFiles);
+        System.out.println("Time took: " + timeTaken + " ms");
     }
 
 }

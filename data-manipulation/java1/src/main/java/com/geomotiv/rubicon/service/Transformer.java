@@ -1,13 +1,16 @@
 package com.geomotiv.rubicon.service;
 
-import com.geomotiv.rubicon.utils.Assert;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import rubiconproject.KeywordService;
 
+import java.util.Objects;
+
 /**
- * Created by Oleg on 7/21/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class Transformer implements Transformable {
 
@@ -26,7 +29,7 @@ public class Transformer implements Transformable {
 
     @Override
     public void transform() {
-        Assert.notNull(keywordService);
+        Objects.requireNonNull(keywordService);
         setOperationResult(keywordService.resolveKeywords(objectToProcess));
     }
 }

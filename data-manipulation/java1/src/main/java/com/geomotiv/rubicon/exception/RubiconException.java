@@ -1,7 +1,9 @@
 package com.geomotiv.rubicon.exception;
 
 /**
- * Created by Oleg on 7/20/16.
+ * <p>Top level application exception.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class RubiconException extends Exception {
 

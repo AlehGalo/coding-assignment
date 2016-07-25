@@ -11,9 +11,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Created by Oleg on 7/18/16.
+ * <p>Reader for path.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
-
 public class JSONPathReader implements ResourceReader<List<Site>, Path> {
 
     private ObjectMapper objectMapper = new ObjectMapper();

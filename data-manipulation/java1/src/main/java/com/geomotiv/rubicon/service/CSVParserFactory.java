@@ -1,16 +1,18 @@
 package com.geomotiv.rubicon.service;
 
 import com.geomotiv.rubicon.exception.RubiconIOException;
-import com.geomotiv.rubicon.utils.Assert;
 import lombok.Setter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Objects;
 
 /**
- * Created by Oleg on 7/19/16.
+ * <p>.</p>
+ * <p>
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public class CSVParserFactory {
 
@@ -20,7 +22,7 @@ public class CSVParserFactory {
     private static final CSVFormat DEFAULT_CSV_FORMAT = CSVFormat.RFC4180.withFirstRecordAsHeader().withIgnoreEmptyLines();
 
     public CSVParser createParser(final Class<? extends Enum<?>> headerEnum, final Reader reader) throws RubiconIOException {
-        Assert.notNull(headerEnum);
+        Objects.requireNonNull(headerEnum);
         try {
             return getParserBasedOnHeader(headerEnum).parse(reader);
         } catch (IOException e) {

@@ -1,7 +1,9 @@
 package com.geomotiv.rubicon.service;
 
 /**
- * Created by Oleg on 7/20/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public interface Extractable<T, E> {
 

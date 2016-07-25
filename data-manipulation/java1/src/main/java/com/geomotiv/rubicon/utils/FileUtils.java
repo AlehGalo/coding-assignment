@@ -2,10 +2,13 @@ package com.geomotiv.rubicon.utils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Function;
 
 /**
- * Created by Oleg on 7/19/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public final class FileUtils {
 
@@ -13,15 +16,15 @@ public final class FileUtils {
     }
 
     public static String getFileExtension(String fileName) {
-        Assert.emptyOrNull(fileName);
+        Assert.notEmpty(fileName);
         int index = fileName.lastIndexOf('.');
         if (index >= 0 && index < fileName.length())
             return fileName.substring(index + 1);
-        return "";
+        return StringUtils.EMPTY;
     }
 
     public static String getFileName(Path source) {
-        Assert.notNull(source);
+        Objects.requireNonNull(source);
         return source.getFileName().toString();
     }
 
@@ -34,8 +37,8 @@ public final class FileUtils {
     }
 
     private static boolean isPermission(Path p, Function<Path, Boolean> function) {
-        Assert.notNull(p);
-        Assert.notNull(function);
+        Objects.requireNonNull(p);
+        Objects.requireNonNull(function);
         return function.apply(p);
     }
 }

@@ -3,7 +3,9 @@ package com.geomotiv.rubicon.io;
 import com.geomotiv.rubicon.exception.RubiconIOException;
 
 /**
- * Created by Oleg on 7/21/16.
+ * <p>.</p>
+ *
+ * <p>Copyright © 2016 Rubicon Project, All rights reserved.</p>
  */
 public interface ResourceWriter<T> {
 
