@@ -1,0 +1,20 @@
+{
+  "name": "dice",
+  "version": "1.0.0",
+  "description": "Dice coding example task.",
+  "main": "dice_expression.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "dependencies": {
+    "random-js": "1.0.8"
+  },
+  "devDependencies": {
+    "test": ">=0.0.5"
+  },
+  "keywords": [
+    "dice"
+  ],
+  "author": "Oleg",
+  "license": "ISC"
+}
