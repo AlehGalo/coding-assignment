@@ -4,13 +4,15 @@
   "description": "Dice coding example task.",
   "main": "dice_expression.js",
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "uglify": "node uglifyjs dice_expression.js -o dice_expression.min.js -m -c"
   },
   "dependencies": {
     "random-js": "1.0.8"
   },
   "devDependencies": {
-    "test": ">=0.0.5"
+    "test": ">=0.0.5",
+    "uglify-js": "1.3.5"
   },
   "keywords": [
     "dice"
