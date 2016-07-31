@@ -3,7 +3,7 @@ var DiceExpression = require('../dice_expression.js');
 var assert = require('assert');
 
 var expressions = ["2d5", "d18", "d%", "5d%", "3D678","-8", "-5D2", "4D9-9+3"];
-var results = [[2, 10], [1, 18], [1, 100], [5, 500], [3, 2034], [-8, -8], [-5, -10], [-2, 30]];
+var results = [[2, 10], [1, 18], [1, 100], [5, 500], [3, 2034], [-8, -8], [-10, -5], [-2, 30]];
 
 exports['test dice expression'] = function(assert) {
     makeTest(expressions, results);
@@ -36,16 +36,25 @@ exports['test input parameters validation'] = function(assert) {
     }
     
     function checkCorrect(expression){
-        assertExpression(expression, true);
+        checkExpression(expression, 0);
     }
 
     function checkIncorrect(expression){
-        assertExpression(expression, false);
+        checkExpression(expression, 1);
     }
 
-    function assertExpression(expression, result){
-        assert.equal(new DiceExpression(expression).validate(), result,
-            'Dice Expression validation test ' + expression +"\'");
+    function checkExpression(expression, correct){
+        var countError = 0;
+        try {
+            instantiateExpression(expression, false);
+        }catch(e){
+            ++countError;
+        }
+        assert.equal(correct, countError, 'Dice Expression validation test ' + expression +"\'");
+    }
+
+    function instantiateExpression(expression){
+        new DiceExpression(expression);
     }
 };
 
@@ -61,11 +70,30 @@ exports['test dice roll validation'] = function(assert) {
                     var operationsResult = rollValue >= itemToCheck[0] 
                         && rollValue <= itemToCheck[1];
                     assert.ok(operationsResult,
-                        "Dice expression checked " + rollValue + " -> [" + itemToCheck[0] 
+                        "Dice expression checked " + item + " = "+ rollValue + " -> [" + itemToCheck[0] 
                         + "..." + itemToCheck[1] + "]");
                 }
                 ++counter;
             });
+    }
+};
+
+exports['test dice roll detailed'] = function(assert) {
+    makeTest(expressions, results, 10);
+    function makeTest(expressionArray, minMaxArray, repeatTime){
+        // var counter = 0;
+        expressionArray.forEach(function (item) {
+            var diceExp = new DiceExpression(item);
+            // var itemToCheck = minMaxArray[counter];
+            for(var i=0; i< repeatTime; i++) {
+                var rollValue = diceExp.rollDetailed();
+                assert.ok(true, rollValue["roll"] + " > " + rollValue.dice);
+                // assert.ok(operationsResult,
+                //     "Dice expression checked " + rollValue + " -> [" + itemToCheck[0]
+                //     + "..." + itemToCheck[1] + "]");
+            }
+            // ++counter;
+        });
     }
 };
 
