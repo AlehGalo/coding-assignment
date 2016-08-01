@@ -2,9 +2,9 @@
   "name": "dice",
   "version": "1.0.0",
   "description": "Dice coding example task.",
-  "main": "dice_expression.js",
+  "main": "lib/dice_expression.js",
   "scripts": {
-    "test": "node test/index.js",
+    "test": "node test/test.js",
     "uglify": "node uglifyjs dice_expression.js -o dice_expression.min.js -m -c"
   },
   "dependencies": {
