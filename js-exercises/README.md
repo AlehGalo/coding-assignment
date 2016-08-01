@@ -56,22 +56,22 @@ var DiceExpression = require('your-module')
 
 var d20 = new DiceExpression('d20')
 
-d20() // 14
-d20() // 7
+d20.roll() // 14
+d20.roll() // 7
 
 var _2d6 = new DiceExpression('2d6')
 
-_2d6() // 7
-_2d6() // 11
+_2d6.roll() // 7
+_2d6.roll() // 11
 _2d6.min() // 2
 _2d6.max() // 12
-_2d6.roll() // { roll: 7, dice: [3, 4] }
+_2d6.rollDetailed() // { roll: 7, dice: [3, 4] }
 
 var d100 = new DiceExpression('d%')
 
-d100() // 99
+d100.roll() // 99
 
 var monsterToHit = new DiceExpression('3d6 + 7')
 
-monsterToHit() // 19
+monsterToHit.roll() // 19
 ```

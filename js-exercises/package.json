@@ -5,7 +5,7 @@
   "main": "lib/dice_expression.js",
   "scripts": {
     "test": "node test/test.js",
-    "uglify": "node uglifyjs dice_expression.js -o dice_expression.min.js -m -c"
+    "uglify": "uglifyjs lib/dice_expression.js -c -m -o dice_expression.min.js"
   },
   "dependencies": {
     "random-js": "1.0.8"
